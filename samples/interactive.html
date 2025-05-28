@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive HTML Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .interactive-section {
+            margin: 25px 0;
+            padding: 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            background-color: #fafbfc;
+        }
+        button {
+            background: linear-gradient(45deg, #007acc, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,122,204,0.3);
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        input:focus, textarea:focus {
+            border-color: #007acc;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0,122,204,0.1);
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e8f5e8;
+            border-left: 4px solid #28a745;
+            border-radius: 4px;
+            display: none;
+        }
+        .counter {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007acc;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .color-box {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 10px auto;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Interactive HTML Example</h1>
+        <p>This example demonstrates interactive JavaScript functionality within rendered HTML.</p>
+        
+        <div class="interactive-section">
+            <h3>📊 Counter Demo</h3>
+            <div class="counter" id="counter">0</div>
+            <button onclick="incrementCounter()">➕ Increment</button>
+            <button onclick="decrementCounter()">➖ Decrement</button>
+            <button onclick="resetCounter()">🔄 Reset</button>
+        </div>
+        
+        <div class="interactive-section">
+            <h3>🎨 Color Changer</h3>
+            <div class="color-box" id="colorBox" style="background-color: #007acc;"></div>
+            <button onclick="changeColor()">🎲 Random Color</button>
+            <button onclick="resetColor()">🔄 Reset Color</button>
+        </div>
+        
+        <div class="interactive-section">
+            <h3>📝 Text Processor</h3>
+            <input type="text" id="textInput" placeholder="Enter some text..." />
+            <button onclick="processText()">🔄 Process Text</button>
+            <div class="result" id="textResult"></div>
+        </div>
+        
+        <div class="interactive-section">
+            <h3>⏰ Current Time</h3>
+            <div id="currentTime" style="font-size: 18px; text-align: center; margin: 20px 0;"></div>
+            <button onclick="updateTime()">🔄 Update Time</button>
+        </div>
+    </div>
+
+    <script>
+        let counter = 0;
+        
+        function incrementCounter() {
+            counter++;
+            document.getElementById('counter').textContent = counter;
+        }
+        
+        function decrementCounter() {
+            counter--;
+            document.getElementById('counter').textContent = counter;
+        }
+        
+        function resetCounter() {
+            counter = 0;
+            document.getElementById('counter').textContent = counter;
+        }
+        
+        function changeColor() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.getElementById('colorBox').style.backgroundColor = randomColor;
+        }
+        
+        function resetColor() {
+            document.getElementById('colorBox').style.backgroundColor = '#007acc';
+        }
+        
+        function processText() {
+            const input = document.getElementById('textInput').value;
+            const result = document.getElementById('textResult');
+            
+            if (input.trim() === '') {
+                alert('Please enter some text!');
+                return;
+            }
+            
+            const processed = {
+                original: input,
+                uppercase: input.toUpperCase(),
+                lowercase: input.toLowerCase(),
+                reversed: input.split('').reverse().join(''),
+                wordCount: input.trim().split(/\s+/).length,
+                charCount: input.length
+            };
+            
+            result.innerHTML = `
+                <h4>Text Analysis Results:</h4>
+                <p><strong>Original:</strong> ${processed.original}</p>
+                <p><strong>Uppercase:</strong> ${processed.uppercase}</p>
+                <p><strong>Lowercase:</strong> ${processed.lowercase}</p>
+                <p><strong>Reversed:</strong> ${processed.reversed}</p>
+                <p><strong>Word Count:</strong> ${processed.wordCount}</p>
+                <p><strong>Character Count:</strong> ${processed.charCount}</p>
+            `;
+            result.style.display = 'block';
+        }
+        
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString();
+            document.getElementById('currentTime').textContent = timeString;
+        }
+        
+        // Initialize time on load
+        updateTime();
+        
+        // Update time every second
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
