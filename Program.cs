@@ -4,6 +4,12 @@ using System.Collections.Concurrent;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure Kestrel for container environment
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(8080); // HTTP
+});
+
 // Add services to the container
 builder.Services.AddControllers();
 builder.Services.AddAntiforgery();

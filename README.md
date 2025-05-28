@@ -15,9 +15,10 @@ A .NET 8 ASP.NET Core web application that demonstrates loading and rendering HT
 ## Getting Started
 
 ### Prerequisites
-- .NET 8 SDK
+- .NET 8 SDK (for local development)
+- Docker (for containerized deployment)
 
-### Running the Application
+### Option 1: Local Development
 
 1. Clone or download the project
 2. Navigate to the project directory
@@ -30,6 +31,18 @@ A .NET 8 ASP.NET Core web application that demonstrates loading and rendering HT
    dotnet run
    ```
 5. Open your browser and navigate to `http://localhost:54568`
+
+### Option 2: Docker Container (Recommended)
+
+1. Ensure Docker is installed and running
+2. Use the provided build script:
+   ```bash
+   chmod +x docker-run.sh
+   ./docker-run.sh
+   ```
+3. Access the application at `http://localhost:8080`
+
+For detailed Docker instructions, see [DOCKER.md](DOCKER.md).
 
 ## Available Endpoints
 
